@@ -1,0 +1,70 @@
+body {
+    padding-top: 7.5rem;
+  }
+  .starter-template {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+.text-right a:hover {
+  text-decoration: none;
+}
+
+.fa-plus {
+  color:rgb(0, 255, 0);
+}
+.fa-plus:hover {
+  color:black;
+}
+
+.fa-times {
+  color:rgb(255, 0, 0);
+}
+.fa-times:hover {
+  color:black;
+}
+
+.fa-edit {
+  color:rgb(255, 174, 0);
+  text-decoration: none;
+}
+.fa-edit:hover {
+  color:black;
+  text-decoration: none;
+}
+
+.fa-check {
+  color:rgb(0, 255, 0);
+  text-decoration: none;
+}
+.fa-check:hover {
+  color:black;
+  text-decoration: none;
+}
+
+.fa-user-circle {
+  color: white;
+  text-decoration: none;
+}
+
+.testy-test {
+  text-decoration: none;
+}
+.testy-test:hover {
+  background-color: darkgrey;
+  text-decoration: none;
+}
+
+.hide-this-button {
+  background: none;
+  padding: 0px;
+  border: none;
+}
+
+.card-text {
+  overflow-x: auto;
+}
+
+.card-body p {
+  overflow-x: auto;
+}
