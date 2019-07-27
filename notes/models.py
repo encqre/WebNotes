@@ -64,3 +64,22 @@ class Update(models.Model):
 
     def __str__(self):
         return str(self.title) + " - " + str(self.date) + " - " + str(self.uuid)
+   
+class Log(models.Model):
+    LOG_TYPES = [
+        ('DEL', "Delete"),
+        ('ADD', "Add"),
+        ('EDIT', "Edit"),
+    ]
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    log = models.CharField(max_length=500)
+    update = models.ForeignKey(Update, default=1, verbose_name="Update", on_delete=models.SET_DEFAULT)
+    updater = models.ForeignKey(Profile, default=1, verbose_name="Updated By", on_delete=models.SET_DEFAULT)
+    date = models.DateTimeField("Log date", default=datetime.now())
+    type = models.CharField(max_length=4, choices=LOG_TYPES)
+
+    class Meta:
+        verbose_name_plural = "Logs"
+
+    def __str__(self):
+        return str(self.uuid) + " - " + str(self.log)
