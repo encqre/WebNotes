@@ -72,14 +72,20 @@
     <p class="lead">All updates by {{profile.full_name}}</p>
   </div>
 
-  {% for update in updates %}    
-    <div class="card border-dark" style="margin-top: 0.25rem" id="card-{{update.uuid}}">
-      <div class="card-body" style="padding-top: 0.5rem;" id="card-body-{{update.uuid}}">
-        <h6 class="card-title" id="title-{{update.uuid}}">{{update.title}}</h6><hr>
-        <p class="card-text" id="content-{{update.uuid}}"> {{update.content|safe}}</p>
+{% for log in logs %}    
+    <div class="card border-dark" style="margin-top: 0.25rem" id="card-{{log.uuid}}">
+      {% if log.type in "EDIT" %}
+      <div class="card-header bg-warning" id="header-{{log.uuid}}">
+      {% elif log.type in "DEL" %}
+      <div class="card-header bg-danger" id="header-{{log.uuid}}">
+      {% elif log.type in "ADD" %}
+      <div class="card-header bg-success" id="header-{{log.uuid}}">
+      {% endif %}
+        <h6 style="font-weight:600; margin-bottom:0;">{{log.log}}</h6>
       </div>
-      <div class="card-footer text-muted text-right" style="padding:0.20rem; padding-right:1rem;" id="footer-{{update.uuid}}">
-        <small>Updated by: {{update.updater.short_name}} @ {{update.date}}</small>
+            <div class="card-body" style="padding-top: 0.5rem;" id="card-body-{{log.uuid}}">
+        <h6 class="card-title" id="title-{{log.uuid}}">{{log.update.title}}</h6><hr>
+        <p class="card-text" id="content-{{log.uuid}}"> {{log.update.content|safe}}</p>
       </div>
     </div>
   {% endfor %}
