@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Category, Entry, Update
+from .models import Profile, Category, Entry, Update, Log
 from tinymce.widgets import TinyMCE
 from django.db import models
 
@@ -13,3 +13,4 @@ admin.site.register(Profile)
 admin.site.register(Category)
 admin.site.register(Entry)
 admin.site.register(Update, UpdateAdmin)
+admin.site.register(Log)
