@@ -265,7 +265,7 @@ function submitEditEntryChanges(entryUUID, entryTitle, entryContent) {
 
                 secondButton.onclick = function() {removeExistingEntry(json.new_uuid)};
                 secondButton.title = "Delete this entry";
-                secondButton.id = "edit-" + json.new_uuid;
+                secondButton.id = "remove-" + json.new_uuid;
 
                 titleNode.removeChild(titleNode.childNodes[0]);
                 titleNode.textContent = json.title;
