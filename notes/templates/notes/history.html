@@ -66,25 +66,96 @@
           </div>
       </nav>
 
-<main role="main" class="container">
+<div class=container-fluid>
+  <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="padding-top: 1rem;">
+          <div class="sidebar-sticky">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Select year</span>
+            </h6>
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:1rem; margin-top:0.5rem;">
+                  {{year}}
+                </a>
+              
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  {% for yr in years %}
+                  {% if yr == year %}
+                  <a class="dropdown-item active" href="/notes/history/?month={{month}}&year={{yr}}">{{yr}}</a>
+                  {% else %}
+                  <a class="dropdown-item" href="/notes/history/?month={{month}}&year={{yr}}">{{yr}}</a>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Select month</span>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=1&year={{year}}">January</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=2&year={{year}}">February</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=3&year={{year}}">March</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=4&year={{year}}">April</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=5&year={{year}}">May</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=6&year={{year}}">June</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=7&year={{year}}">July</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=8&year={{year}}">August</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=9&year={{year}}">September</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=10&year={{year}}">October</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=11&year={{year}}">November</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/notes/history/?month=12&year={{year}}">December</a>
+              </li>
+            </ul>
+          </div>
+        </nav>    
+<main role="main" class="col-md-8 offset-md-1">
 
-  <div class="starter-template">
-    <p class="lead">History of all updates</p>
-  </div>
+  <p class="lead text-center" style="padding-top: 1rem; padding-bottom: 1rem;">Notes history for {{month_name}}, {{year}}</p>
 
-  {% for update in updates %}    
-    <div class="card border-dark" style="margin-top: 0.25rem" id="card-{{update.uuid}}">
-      <div class="card-body" style="padding-top: 0.5rem;" id="card-body-{{update.uuid}}">
-        <h6 class="card-title" id="title-{{update.uuid}}">{{update.title}}</h6><hr>
-        <p class="card-text" id="content-{{update.uuid}}"> {{update.content|safe}}</p>
+  {% for log in logs %}    
+    <div class="card border-dark" style="margin-top: 0.25rem" id="card-{{log.uuid}}">
+      {% if log.type in "EDIT" %}
+      <div class="card-header bg-warning" id="header-{{log.uuid}}">
+      {% elif log.type in "DEL" %}
+      <div class="card-header bg-danger" id="header-{{log.uuid}}">
+      {% elif log.type in "ADD" %}
+      <div class="card-header bg-success" id="header-{{log.uuid}}">
+      {% endif %}
+        <h6 style="font-weight:600; margin-bottom:0;">{{log.log}}</h6>
       </div>
-      <div class="card-footer text-muted text-right" style="padding:0.20rem; padding-right:1rem;" id="footer-{{update.uuid}}">
-        <small>Updated by: {{update.updater.short_name}} @ {{update.date}}</small>
+      <div class="card-body" style="padding-top: 0.5rem;" id="card-body-{{log.uuid}}">
+        <h6 class="card-title" id="title-{{log.uuid}}">{{log.update.title}}</h6><hr>
+        <p class="card-text" id="content-{{log.uuid}}"> {{log.update.content|safe}}</p>
       </div>
     </div>
   {% endfor %}
 
 </main>
+  </div>
+    </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
